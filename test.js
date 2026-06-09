@@ -42,3 +42,15 @@ function createSlug2(string) {
 test("La funzione createSlug2 sostituisce gli spazi con -.", () => {
     expect(createSlug2("Questo è un test")).toBe("questo-è-un-test")
 })
+
+//snack 5
+
+function isPalindrome(string) {
+    const stringLowerCase = string.toLowerCase()
+    const reverseString = stringLowerCase.split('').reverse().join('')
+    return stringLowerCase === reverseString
+}
+
+test("La funzione isPalindrome verifica se una stringa è un palindromo.", () => {
+    expect(isPalindrome("Anna")).toBe(true)
+})
