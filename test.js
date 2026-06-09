@@ -33,4 +33,12 @@ test("La funzione average calcola la media aritmetica di un array di numeri.", (
     expect(average([1, 2, 3, 4, 5])).toBe(3)
 })
 
-//snack 
+//snack 4 
+
+function createSlug2(string) {
+    return string.toLowerCase().replaceAll(" ", "-")
+}
+
+test("La funzione createSlug2 sostituisce gli spazi con -.", () => {
+    expect(createSlug2("Questo è un test")).toBe("questo-è-un-test")
+})
