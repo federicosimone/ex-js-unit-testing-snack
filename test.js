@@ -46,11 +46,58 @@ test("La funzione createSlug2 sostituisce gli spazi con -.", () => {
 //snack 5
 
 function isPalindrome(string) {
-    const stringLowerCase = string.toLowerCase()
+    const stringLowerCase = string.toLowerCase().trim()
     const reverseString = stringLowerCase.split('').reverse().join('')
-    return stringLowerCase === reverseString
+    return stringLowerCase.trim() === reverseString
 }
 
 test("La funzione isPalindrome verifica se una stringa è un palindromo.", () => {
-    expect(isPalindrome("Anna")).toBe(true)
+    expect(isPalindrome("Anna")).toBeTruthy()
+    expect(isPalindrome("Fede")).toBeFalsy()
+})
+
+//snack 6 
+
+function createSlug3(titolo) {
+    if (!titolo) {
+        throw new Error("Titolo non valido")
+    }
+}
+
+test("La funzione createSlug lancia un errore se il titolo è vuoto o non valido.", () => {
+    expect(() => createSlug3("")).toThrow("Titolo non valido");
+    expect(() => createSlug3(null)).toThrow("Titolo non valido")
+})
+
+//snack 7 
+
+const posts = [
+    { id: 1, title: "Ciao", slug: "Ciaone" },
+    { id: 2, title: "React Hooks", slug: "react-hooks" },
+
+]
+
+function findPostById(posts, id) {
+
+    if (isNaN(id)) {
+        throw new Error(`"${id}" non è un id`)
+    }
+
+    posts.forEach(p => {
+        if (
+            p.id === undefined ||
+            p.title === undefined ||
+            p.slug === undefined
+        ) {
+            throw new Error('"L\'array non è nel formato corretto"')
+        }
+    });
+    return posts.find(p => p.id === id) || null;
+
+}
+
+test(`La funzione findPostById restituisce il post corretto dato l’array di post e l’id`, () => {
+    expect(findPostById(posts, 2)).toEqual({ id: 2, title: "React Hooks", slug: "react-hooks" })
+    expect(() => findPostById(posts, "ciao")).toThrow('"ciao" non è un id')
+    expect(() => findPostById([34, 68], 2)).toThrow("L\'array non è nel formato corretto")
 })
